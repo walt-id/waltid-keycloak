@@ -8,8 +8,13 @@ cd waltid-keycloak-nuxt/
 pnpm install
 pnpm i -D @sidebase/nuxt-auth
 pnpm i next-auth@4.22.5
+```
+
+## Running the NUXT app
+```shell
 pnpm dev --open
 ```
+
 # Setting up Keycloak
 
 Run Keycloak:
