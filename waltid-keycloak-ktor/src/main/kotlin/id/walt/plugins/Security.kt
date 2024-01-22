@@ -7,16 +7,17 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import io.ktor.server.plugins.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 
 // based on https://medium.com/@chendenny/ktor-with-oauth-2-0-443b7367c508
 
-val jwkEndpointUrl = URLBuilder("").build().toURI().toURL()
+val jwkEndpointUrl = URLBuilder("http://localhost:8080/realms/waltid-keycloak-ktor/protocol/openid-connect/certs").build().toURI().toURL()
 val jwkProvider = JwkProviderBuilder(jwkEndpointUrl).build()
 
-val issuer = "http://127.0.0.1:8080/realms/waltid-keycloak-ktor" // ???
+val issuer = "http://localhost:8080/realms/waltid-keycloak-ktor"
 
 fun Application.configureSecurity() {
     authentication {
@@ -51,7 +52,24 @@ fun Application.configureSecurity() {
                 }
             }
             challenge { defaultScheme, realm ->
+
+
+                call.request.headers["Authorization"]?.let {
+                    if (it.isNotEmpty()) {
+                        // Token expired
+                        // Authentication exception
+                        println("Token issue $it")
+
+                        throw BadRequestException("Token issue $it")
+                    } else {
+                        throw BadRequestException("Authorization header can not be blank!")
+                    }
+                } ?: throw BadRequestException("Authorization header can not be blank!")
+
+
                 call.respond(HttpStatusCode.Unauthorized, "Token is not valid or has expired")
+
+
             }
         }
         /*        oauth("auth-oauth-google") {
@@ -80,14 +98,6 @@ fun Application.configureSecurity() {
                 val principal: OAuthAccessTokenResponse.OAuth2? = call.principal()
                 call.respondText("$principal?.accessToken")
             }
-            authenticate("auth-jwt") {
-                get("/world") {
-                    val principal = call.principal<JWTPrincipal>()
-                    val username = principal!!.payload.getClaim("preferred_username").asString()
-                    val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
-                    call.respondText("Hello, $username! Token is expired at $expiresAt ms. ${principal?.payload?.subject}")
-                }
-            }
 
             /*        authenticate("auth-oauth-google") {
             get("login") {
@@ -100,6 +110,15 @@ fun Application.configureSecurity() {
                 call.respondRedirect("/hello")
             }
         }*/
+        }
+
+        authenticate("auth-jwt") {
+            get("/world") {
+                val principal = call.principal<JWTPrincipal>()
+                val username = principal!!.payload.getClaim("preferred_username").asString()
+                val expiresAt = principal.expiresAt?.time?.minus(System.currentTimeMillis())
+                call.respondText("Hello, $username! Token expires at $expiresAt ms. ${principal?.payload?.subject}")
+            }
         }
     }
 }
