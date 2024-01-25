@@ -23,7 +23,7 @@
           Not logged in
         </h1>
       </div>
-      <button v-if="status === 'authenticated'" class="flex items-center justify-center space-x-2 bg-red-500 text-white rounded-lg py-2 px-3 text-lg" @click="signOut({ callbackUrl: '/' })">
+      <button v-if="status === 'authenticated'" class="flex items-center justify-center space-x-2 bg-red-500 text-white rounded-lg py-2 px-3 text-lg" @click="signOut()">
         <span>Logout</span>
       </button>
       <button v-else class="flex items-center justify-center space-x-2 bg-green-500 text-white rounded-lg py-2 px-3 text-lg" @click="signIn()">
@@ -43,16 +43,65 @@
     </p>
     <pre v-if="status"><span>Status:</span> {{ status }}</pre>
     <pre v-if="data"><span>Data:</span> {{ data }}</pre>
-    <pre v-if="csrfToken"><span>CSRF Token:</span> {{ csrfToken }}</pre>
-    <pre v-if="providers"><span>Providers:</span> {{ providers }}</pre>
+
+
+    <pre v-if="session"><span>Session:</span> {{ session }}</pre>
+
+
+    {{status}}
+
+
   </div>
 </template>
 
 <script lang="ts" setup>
-definePageMeta({auth: false})
-const {status, data, signOut, signIn, getCsrfToken, getProviders} = useAuth()
 
-const providers = await getProviders()
-const csrfToken = await getCsrfToken()
+
+
+import {signOut ,SessionProvider ,getSession , useSession ,} from "next-auth/react";
+
+
+definePageMeta({auth: false})
+const {status, data, signIn  , getProviders} = useAuth()
+
+
+const session = await getSession()
+
+
+
+async function signOut() {
+
+  //@ts-ignore
+  let accessToken = session.accessToken
+  //@ts-ignore
+
+  let refreshToken = session.refreshToken
+  let realm = "waltid-keycloak-nuxt"
+  let logoutUrl = "http://0.0.0.0:8080/realms/waltid-keycloak-nuxt/protocol/openid-connect/logout"
+
+  const headers = new Headers();
+  headers.append("Authorization", `Bearer ${accessToken}`);
+  headers.append("Content-Type", "application/x-www-form-urlencoded");
+
+  const formData = new URLSearchParams();
+  formData.append("client_id", "testid");
+  if (refreshToken) {
+    formData.append("refresh_token", refreshToken);
+  }
+  formData.append("client_secret" , "mM4YXjJlf9RxrCI7R7FsB13tqWBeB4Zj")
+
+  const options = {
+    method: "POST",
+    headers: headers,
+    body: formData,
+  };
+
+  fetch(logoutUrl, options)
+      .then(response => response.json()) // You can handle the response accordingly
+      .catch(error => console.error('Error:', error));
+
+
+}
+
 </script>
 

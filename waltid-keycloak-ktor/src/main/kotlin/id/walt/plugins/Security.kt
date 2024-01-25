@@ -94,7 +94,7 @@ fun Application.configureSecurity() {
                         header("Authorization", "Bearer ${call.principal<OAuthAccessTokenResponse.OAuth2>()?.accessToken}")
                         header("Content-Type", "application/x-www-form-urlencoded")
                         body = FormDataContent(Parameters.build {
-                            append("client_id", "waltid_backend")
+                                append("client_id", "waltid_backend")
                             call.principal<OAuthAccessTokenResponse.OAuth2>()?.refreshToken?.let { it1 ->
                                 append("refresh_token",
                                     it1
