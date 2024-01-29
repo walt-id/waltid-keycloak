@@ -71,3 +71,7 @@ S
 #.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
 w
 G.idea/sonarlint/issuestore/6/a/6a61e88a7ba95584266a356d525afb7ab976f071,2/f/2f2c6ad2db7b3a1157fd765ff6f047894c6ca805
+Y
+)waltid-keycloak-nuxt/server/tsconfig.json,4/8/483495f9645d83096d2c02bb1c6eb938109a7473
+d
+4waltid-keycloak-nuxt/composables/authentification.ts,c/4/c45eab87c4a73dc06bcb5d89226500eb5c96ef34
