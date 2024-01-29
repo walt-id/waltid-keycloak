@@ -26,7 +26,7 @@
       <button v-if="status === 'authenticated'" class="flex items-center justify-center space-x-2 bg-red-500 text-white rounded-lg py-2 px-3 text-lg" @click="logout()">
         <span>Logout</span>
       </button>
-      <button v-else class="flex items-center justify-center space-x-2 bg-green-500 text-white rounded-lg py-2 px-3 text-lg" @click="signIn()">
+      <button v-else class="flex items-center justify-center space-x-2 bg-green-500 text-white rounded-lg py-2 px-3 text-lg" @click="signIn('keycloak')">
         <i class="fa fa-right-to-bracket pt-0.5" />
         <span>Login</span>
       </button>
