@@ -74,9 +74,6 @@ async function logout() {
      signOut()
     window.location.href = "http://localhost:8080/realms/waltid-keycloak-nuxt/protocol/openid-connect/logout"
 
-  let refreshToken = session.refreshToken
-  let realm = "waltid-keycloak-nuxt"
-  let logoutUrl = "http://0.0.0.0:8080/realms/waltid-keycloak-nuxt/protocol/openid-connect/logout"
 
   } catch (e) {
     console.error(e)
