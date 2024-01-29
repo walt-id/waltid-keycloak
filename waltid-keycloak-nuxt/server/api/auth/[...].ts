@@ -7,8 +7,8 @@ export default NuxtAuthHandler({
   // TODO: ADD YOUR OWN AUTHENTICATION PROVIDER HERE, READ THE DOCS FOR MORE: https://sidebase.io/nuxt-auth
   providers: [
     KeycloakProvider.default({
-      clientId: process.env.AUTH_CLIENT_ID ?? "",
-      clientSecret: "mM4YXjJlf9RxrCI7R7FsB13tqWBeB4Zj",
+      clientId: "waltid_backend",
+      clientSecret: "5FXJ9IxtMTHWfGUDDU8LGZXaWEu3Qqnk",
       //authorization: process.env.AUTH_AUTHORIZATION ?? "",
       issuer: "http://localhost:8080/realms/waltid-keycloak-nuxt",
       idToken: true,
