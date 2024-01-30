@@ -23,10 +23,10 @@
           Not logged in
         </h1>
       </div>
-      <button v-if="status === 'authenticated'" class="flex items-center justify-center space-x-2 bg-red-500 text-white rounded-lg py-2 px-3 text-lg" @click="signOut({ callbackUrl: '/' })">
+      <button v-if="status === 'authenticated'" class="flex items-center justify-center space-x-2 bg-red-500 text-white rounded-lg py-2 px-3 text-lg" @click="logout()">
         <span>Logout</span>
       </button>
-      <button v-else class="flex items-center justify-center space-x-2 bg-green-500 text-white rounded-lg py-2 px-3 text-lg" @click="signIn()">
+      <button v-else class="flex items-center justify-center space-x-2 bg-green-500 text-white rounded-lg py-2 px-3 text-lg" @click="signIn('keycloak')">
         <i class="fa fa-right-to-bracket pt-0.5" />
         <span>Login</span>
       </button>
@@ -43,16 +43,45 @@
     </p>
     <pre v-if="status"><span>Status:</span> {{ status }}</pre>
     <pre v-if="data"><span>Data:</span> {{ data }}</pre>
-    <pre v-if="csrfToken"><span>CSRF Token:</span> {{ csrfToken }}</pre>
-    <pre v-if="providers"><span>Providers:</span> {{ providers }}</pre>
+
+
+    <pre v-if="session"><span>Session:</span> {{ session }}</pre>
+
+
+    {{status}}
+
+
   </div>
 </template>
 
 <script lang="ts" setup>
-definePageMeta({auth: false})
-const {status, data, signOut, signIn, getCsrfToken, getProviders} = useAuth()
 
-const providers = await getProviders()
-const csrfToken = await getCsrfToken()
+
+
+import {SessionProvider ,getSession , useSession ,} from "next-auth/react";
+
+
+definePageMeta({auth: false})
+const {status, data, signIn  , signOut} = useAuth()
+
+
+const session = await getSession()
+
+
+
+async function logout() {
+  try {
+     signOut()
+    window.location.href = "http://localhost:8080/realms/waltid-keycloak-nuxt/protocol/openid-connect/logout"
+
+
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+
+
+
 </script>
 
