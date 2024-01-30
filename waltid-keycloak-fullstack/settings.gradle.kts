@@ -1,1 +1,1 @@
-rootProject.name = "waltid-keycloak-ktor"
+rootProject.name = "waltid-keycloak-fullstack"
