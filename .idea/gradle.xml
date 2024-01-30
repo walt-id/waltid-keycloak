@@ -4,6 +4,24 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/waltid-keycloak-fullstack" />
+        <option name="gradleJvm" value="corretto-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/waltid-keycloak-fullstack" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/waltid-keycloak-fullstack/gradle" />
+        <option name="gradleJvm" value="corretto-18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/waltid-keycloak-fullstack/gradle" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/waltid-keycloak-ktor" />
         <option name="gradleJvm" value="corretto-18" />
         <option name="modules">

@@ -1,0 +1,9 @@
+
+Hkotlin:S1172…"(Remove these unused function parameters.(ÛÍˆä8’Ş¼»Õ1
+Qkotlin:S1172>"2Use "_" instead of these unused lambda parameters.(æ¨ÜË8“Ş¼»Õ1
+=kotlin:S125"Remove this commented out code.(Û°Ğ8•Ş¼»Õ1
+Nkotlin:S1481j"*Remove this unused "realm" local variable.(Ğİ½şÿÿÿÿ8šŞ¼»Õ1
+Okotlin:S1481}"+Remove this unused "status" local variable.(Û¤İıÿÿÿÿ8šŞ¼»Õ1
+Mkotlin:S1481R".Remove this unused "expiresAt" local variable.(—ğ°‹8¨Ä›¼Õ1
+Skotlin:S1481‰".Remove this unused "logoutUrl" local variable.(Æ¢Ãäüÿÿÿÿ8šŞ¼»Õ1
+Kkotlin:S1481ˆ"+Remove this unused "client" local variable.(…Ê£é8šŞ¼»Õ1
