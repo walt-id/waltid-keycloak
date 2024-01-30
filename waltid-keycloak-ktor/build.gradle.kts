@@ -23,6 +23,9 @@ repositories {
 }
 
 dependencies {
+    implementation("io.ktor:ktor-server-cors-jvm:2.3.6")
+    implementation("io.ktor:ktor-server-auto-head-response:2.3.6")
+
     implementation("io.ktor:ktor-server-core-jvm")
     implementation("io.ktor:ktor-server-swagger-jvm")
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
