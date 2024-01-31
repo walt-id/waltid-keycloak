@@ -4,10 +4,9 @@ import { NuxtAuthHandler } from '#auth'
 
 export default NuxtAuthHandler({
   secret: process.env.AUTH_SECRET || 'my-auth-secret',
-  // TODO: ADD YOUR OWN AUTHENTICATION PROVIDER HERE, READ THE DOCS FOR MORE: https://sidebase.io/nuxt-auth
   providers: [
     KeycloakProvider.default({
-      clientId: "waltid_backend",
+      clientId: "client-nuxt",
       clientSecret: "5FXJ9IxtMTHWfGUDDU8LGZXaWEu3Qqnk",
       //authorization: process.env.AUTH_AUTHORIZATION ?? "",
       issuer: "http://localhost:8080/realms/waltid-keycloak-nuxt",
@@ -39,7 +38,6 @@ export default NuxtAuthHandler({
       if (account) {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token; // Add this line to store the refresh token in the JWT
-
       }
       return token;
     },
